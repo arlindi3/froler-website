@@ -1,0 +1,275 @@
+/* Services Section Styles */
+.services {
+  padding: 5rem 0;
+  background: linear-gradient(135deg, var(--offWhite) 0%, #f8f9fa 100%);
+  position: relative;
+}
+
+.services::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="%23e0e0e0" stroke-width="0.5" opacity="0.3"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+  pointer-events: none;
+  opacity: 0.3;
+}
+
+.services-center {
+  width: 90vw;
+  margin: 0 auto;
+  max-width: 1170px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-gap: 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.service-card {
+  background: white;
+  padding: 3rem 2rem;
+  border-radius: 15px;
+  text-align: center;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(175, 154, 125, 0.1);
+}
+
+/* Force all cards in one row on desktop */
+@media screen and (min-width: 1024px) {
+  .services-center {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.service-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(175, 154, 125, 0.1),
+    transparent
+  );
+  transition: left 0.6s ease;
+}
+
+.service-card:hover::before {
+  left: 100%;
+}
+
+.service-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+  border-color: var(--primaryColor);
+}
+
+.service-icon {
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, var(--primaryColor), #e9bc7d);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.service-icon::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    45deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.2) 50%,
+    transparent 70%
+  );
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.service-card:hover .service-icon::before {
+  transform: translateX(100%);
+}
+
+.service-icon svg {
+  color: #83c03e !important;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+  transition: all 0.3s ease;
+}
+
+.service-card:hover .service-icon {
+  transform: scale(1.1) rotate(5deg);
+}
+
+.service-title {
+  font-size: 1.3rem;
+  color: var(--mainBlack);
+  margin-bottom: 1rem;
+  font-weight: 600;
+  text-transform: capitalize;
+  letter-spacing: var(--mainSpacing);
+  position: relative;
+}
+
+.service-title::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, var(--primaryColor), #e9bc7d);
+  transition: width 0.3s ease;
+}
+
+.service-card:hover .service-title::after {
+  width: 50px;
+}
+
+.service-info {
+  color: var(--mainBlack);
+  line-height: 1.6;
+  font-size: 0.95rem;
+  margin-bottom: 0;
+  opacity: 0.8;
+  transition: opacity 0.3s ease;
+}
+
+.service-card:hover .service-info {
+  opacity: 1;
+}
+
+/* Card Number Styling */
+.service-card .service-icon {
+  background: #05284d !important;
+}
+
+.service-card:nth-child(2) .service-icon {
+  background: linear-gradient(135deg, #e74c3c, #c0392b);
+}
+
+.service-card:nth-child(3) .service-icon {
+  background: linear-gradient(135deg, #27ae60, #229954);
+}
+
+.service-card:nth-child(4) .service-icon {
+  background: linear-gradient(135deg, #f39c12, #e67e22);
+}
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+  .services {
+    padding: 3rem 0;
+  }
+
+  .services-center {
+    width: 95vw;
+    grid-template-columns: 1fr;
+    grid-gap: 1.5rem;
+  }
+
+  .service-card {
+    padding: 2rem 1.5rem;
+  }
+
+  .service-icon {
+    width: 70px;
+    height: 70px;
+  }
+
+  .service-icon svg {
+    width: 35px !important;
+    height: 35px !important;
+  }
+
+  .service-title {
+    font-size: 1.1rem;
+  }
+
+  .service-info {
+    font-size: 0.9rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .services {
+    padding: 2rem 0;
+  }
+
+  .service-card {
+    padding: 1.5rem 1rem;
+  }
+
+  .service-icon {
+    width: 60px;
+    height: 60px;
+  }
+
+  .service-icon svg {
+    width: 30px !important;
+    height: 30px !important;
+  }
+
+  .service-title {
+    font-size: 1rem;
+  }
+
+  .service-info {
+    font-size: 0.85rem;
+  }
+}
+
+/* Animation for cards entering viewport */
+.service-card {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+.service-card:nth-child(1) {
+  animation-delay: 0.1s;
+}
+
+.service-card:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.service-card:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.service-card:nth-child(4) {
+  animation-delay: 0.4s;
+}
+
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hover effect for the entire services section */
+.services:hover .service-card:not(:hover) {
+  opacity: 0.7;
+  transform: scale(0.95);
+}

@@ -1,20 +1,19 @@
-import React, { Component } from 'react'
-import defaultBcg from '../images/car-2.jpg';
+import React, { Component } from "react";
+import defaultBcg from "../images/car-2.jpg";
 // import Hero from './HeroBackground'
-import Banner from './Banner'
-import { Link } from 'react-router-dom';
-import { CarContext } from '../context';
-import StyledHeroBackground from './StyledHeroBackground';
+import Banner from "./Banner";
+import { Link } from "react-router-dom";
+import { CarContext } from "../context"; // Changed from "../Context" to "../context"
+import StyledHeroBackground from "./StyledHeroBackground";
 
 export default class SingleCar extends Component {
-
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
       slug: this.props.match.params.slug,
-      defaultBcg
-    }
+      defaultBcg,
+    };
   }
 
   static contextType = CarContext;
@@ -25,27 +24,34 @@ export default class SingleCar extends Component {
 
     if (!car) {
       return (
-
         <div className="error">
           <h3>Car not available...</h3>
-          <Link to='/cars' className="btn-primary">
+          <Link to="/Makinat" className="btn-primary">
             Back to cars
           </Link>
-
         </div>
-      )
+      );
     }
-    const { name, description, carMake, size, price, extras, gps, sportPackage, images } = car;
+    const {
+      name,
+      description,
+      carMake,
+      size,
+      price,
+      extras,
+      gps,
+      sportPackage,
+      images,
+    } = car;
     const [mainImg, ...defaultImg] = images;
 
-    // console.log(car)
     return (
       <>
         <StyledHeroBackground img={mainImg || this.state.defaultBcg}>
           <Banner title={`${name}`}>
-            <Link to='/cars' className="btn-primary">
+            <Link to="/Makinat" className="btn-primary">
               Back to cars
-          </Link>
+            </Link>
           </Banner>
         </StyledHeroBackground>
 
@@ -64,11 +70,10 @@ export default class SingleCar extends Component {
               <h3>info</h3>
               <h6>price: ${price}</h6>
               <h6>Fuel Tank: {size} L</h6>
+              <h6>Manufacturer: {carMake}</h6>
               <h6>
-                Manufacturer: {carMake}
-              </h6>
-              <h6>
-                Sport Package: {sportPackage ? "high performance sport motor" : "unavailable"}
+                Sport Package:{" "}
+                {sportPackage ? "high performance sport motor" : "unavailable"}
               </h6>
               <h6>GPS: {gps ? "included" : "unavailable"}</h6>
             </article>
@@ -79,13 +84,11 @@ export default class SingleCar extends Component {
           <h6>premium features</h6>
           <ul className="extras">
             {extras.map((item, index) => {
-              return <li key={index}>- {item}</li>
+              return <li key={index}>- {item}</li>;
             })}
           </ul>
         </section>
       </>
-    )
+    );
   }
 }
-
-

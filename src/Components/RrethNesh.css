@@ -1,0 +1,100 @@
+/* Rreth Nesh Page Styles */
+.rrethnesh-container {
+  background: linear-gradient(135deg, #f7fafc 0%, #e9f1fa 100%);
+  border-radius: 18px;
+  box-shadow: 0 4px 24px rgba(10, 61, 92, 0.08);
+  padding: 2.5rem 2rem 2rem;
+  max-width: 900px;
+  margin: 2.5rem auto;
+  font-family: "Segoe UI", "Roboto", Arial, sans-serif;
+  color: #0a3d5c;
+}
+
+.rrethnesh-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 1.2rem;
+  color: #0a3d5c;
+  letter-spacing: 1px;
+  text-align: center;
+}
+
+.rrethnesh-lead {
+  font-size: 1.15rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  color: #23476a;
+}
+
+.rrethnesh-content {
+  display: flex;
+  gap: 2.5rem;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+
+.rrethnesh-section {
+  flex: 1 1 320px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(10, 61, 92, 0.06);
+  padding: 1.5rem 1.2rem;
+  margin-bottom: 1.5rem;
+}
+
+.rrethnesh-section h2 {
+  font-size: 1.2rem;
+  color: #83c03e;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.rrethnesh-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.rrethnesh-list li {
+  font-size: 1rem;
+  color: #0a3d5c;
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 0.7rem;
+}
+
+.rrethnesh-list li::before {
+  content: "•";
+  color: #83c03e;
+  font-size: 1.2rem;
+  position: absolute;
+  left: 0;
+  top: 0.1rem;
+}
+
+.rrethnesh-quote {
+  background: #e9bc7d22;
+  border-left: 5px solid #e9bc7d;
+  border-radius: 8px;
+  padding: 1.2rem 1.5rem;
+  font-size: 1.1rem;
+  color: #23476a;
+  text-align: center;
+  font-style: italic;
+  margin-top: 1.5rem;
+}
+
+@media (max-width: 700px) {
+  .rrethnesh-content {
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+  .rrethnesh-section {
+    padding: 1.2rem 0.7rem;
+  }
+  .rrethnesh-title {
+    font-size: 1.4rem;
+  }
+}

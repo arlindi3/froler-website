@@ -1,0 +1,75 @@
+/* Servisi Page Styles */
+.servisi-container {
+  background: linear-gradient(135deg, #e9f1fa 0%, #f7fafc 100%);
+  border-radius: 18px;
+  box-shadow: 0 4px 24px rgba(10, 61, 92, 0.08);
+  padding: 2.5rem 2rem 2rem;
+  max-width: 800px;
+  margin: 2.5rem auto;
+  font-family: "Segoe UI", "Roboto", Arial, sans-serif;
+  color: #0a3d5c;
+}
+
+.servisi-title {
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: 1.2rem;
+  color: #0a3d5c;
+  letter-spacing: 1px;
+  text-align: center;
+}
+
+.servisi-description {
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  color: #23476a;
+}
+
+.servisi-list {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(10, 61, 92, 0.06);
+  padding: 1.2rem 1.5rem;
+  margin-bottom: 1.5rem;
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.7rem 1.5rem;
+}
+
+.servisi-list li {
+  font-size: 1rem;
+  color: #0a3d5c;
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+.servisi-list li::before {
+  content: "✔";
+  color: #83c03e;
+  font-size: 1.1rem;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.servisi-note {
+  font-size: 1.05rem;
+  color: #23476a;
+  margin-bottom: 0.7rem;
+  text-align: center;
+}
+
+@media (max-width: 600px) {
+  .servisi-container {
+    padding: 1.2rem 0.5rem;
+  }
+  .servisi-title {
+    font-size: 1.4rem;
+  }
+  .servisi-list {
+    grid-template-columns: 1fr;
+    padding: 1rem 0.7rem;
+  }
+}
