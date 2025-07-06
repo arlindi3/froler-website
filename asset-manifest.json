@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/froler-website/static/css/main.8abea5a0.css",
-    "main.js": "/froler-website/static/js/main.55eb1fa6.js",
+    "main.js": "/froler-website/static/js/main.a8bf9ffd.js",
     "static/media/details-8.jpg": "/froler-website/static/media/details-8.aa06a9868aaf9e16f52d.jpg",
     "static/media/banner.jpg": "/froler-website/static/media/banner.feacaa3b89d5b577f67e.jpg",
     "static/media/car-1.jpeg": "/froler-website/static/media/car-1.8831bcacc78dcfcb938a.jpeg",
@@ -60,10 +60,10 @@
     "static/media/details-37.jpg": "/froler-website/static/media/details-37.b997d769b9b3e51e85a4.jpg",
     "index.html": "/froler-website/index.html",
     "main.8abea5a0.css.map": "/froler-website/static/css/main.8abea5a0.css.map",
-    "main.55eb1fa6.js.map": "/froler-website/static/js/main.55eb1fa6.js.map"
+    "main.a8bf9ffd.js.map": "/froler-website/static/js/main.a8bf9ffd.js.map"
   },
   "entrypoints": [
     "static/css/main.8abea5a0.css",
-    "static/js/main.55eb1fa6.js"
+    "static/js/main.a8bf9ffd.js"
   ]
 }
