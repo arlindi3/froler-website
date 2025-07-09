@@ -26,9 +26,16 @@ const Home = () => {
             className="btn-primary"
             style={{
               color: "#fff",
-              backgroundColor: "#222",
-              border: "1px solid #fff",
-              textShadow: "1px 1px 4px #000",
+              backgroundColor: "#0a3d5c",
+              border: "none",
+              padding: "0.7rem 2rem",
+              fontWeight: "500",
+              fontSize: "1rem",
+              borderRadius: "3px",
+              letterSpacing: "0.5px",
+              boxShadow: "none",
+              textShadow: "none",
+              transition: "background 0.2s, color 0.2s",
             }}
           >
             Makinat Tona

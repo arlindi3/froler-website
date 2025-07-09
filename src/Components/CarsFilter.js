@@ -28,13 +28,13 @@ const CarsFilter = ({ cars }) => {
   let types = uniqueValues(cars, "type");
 
   // add 'all' type to array
-  types = ["Te gjitha", ...types];
+  types = ["all", ...types];
 
   //JSX MARKUP for types of cars
   types = types.map((item, index) => {
     return (
       <option value={item} key={index}>
-        {item}
+        {item === "all" ? "Te gjitha" : item}
       </option>
     );
   });
@@ -42,12 +42,12 @@ const CarsFilter = ({ cars }) => {
   //JSX MARKUP for cars capacity(car make-manufacturer)
   let manufacturers = uniqueValues(cars, "carMake");
   // add 'all' type to array
-  manufacturers = ["Te gjitha", ...manufacturers];
+  manufacturers = ["all", ...manufacturers];
 
   manufacturers = manufacturers.map((manufacturer, index) => {
     return (
       <option key={index} value={manufacturer}>
-        {manufacturer}
+        {manufacturer === "all" ? "Te gjitha" : manufacturer}
       </option>
     );
   });
@@ -87,7 +87,7 @@ const CarsFilter = ({ cars }) => {
         {/* cars price select type */}
         <div className="form-group">
           <label htmlFor="price">
-            Cmimi ${price}
+            Cmimi €{price.toLocaleString("de-DE")}
             <input
               onChange={handleChange}
               type="range"

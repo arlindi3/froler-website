@@ -533,15 +533,25 @@ h6 {
   width: 80vw;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
-  grid-row-gap: 2rem;
-  grid-column-gap: 40px;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  grid-row-gap: 1rem;
+  grid-column-gap: 15px;
 }
 
-@media screen and (min-width: 776px) {
+@media screen and (max-width: 768px) {
   .featured-cars-center {
     width: 90vw;
-    grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    grid-column-gap: 12px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .featured-cars-center {
+    width: 95vw;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    grid-row-gap: 0.8rem;
+    grid-column-gap: 8px;
   }
 }
 
@@ -549,6 +559,7 @@ h6 {
   .featured-cars-center {
     width: 95vw;
     max-width: 1170px;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   }
 }
 
@@ -557,10 +568,18 @@ h6 {
 .car {
   box-shadow: var(--lightShadow);
   transition: var(--mainTransition);
+  border-radius: 5px;
+  overflow: hidden;
+  background: var(--mainWhite);
+  margin-bottom: 0.6rem;
+  max-width: 220px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .car:hover {
   box-shadow: var(--darkShadow);
+  transform: translateY(-5px);
 }
 
 .img-container {
@@ -569,28 +588,38 @@ h6 {
 
 .img-container img {
   width: 100%;
+  height: 200px;
+  object-fit: cover;
+  object-position: center;
   display: block;
   transition: var(--mainTransition);
 }
 
 .price-top {
   position: absolute;
-  top: 0;
-  left: 0;
-  background: rgba(0, 0, 0, 0.8);
+  top: 6px;
+  left: 6px;
+  background: rgba(0, 0, 0, 0.85);
   color: var(--mainWhite);
-  padding: 0.3rem 0.6rem 0.5rem;
-  border-bottom: 1rem;
+  padding: 0.2rem 0.4rem;
+  border-radius: 3px;
   font-size: 0.5rem;
   text-align: center;
   transition: var(--mainTransition);
+  backdrop-filter: blur(10px);
 }
 
 .price-top h6 {
   margin-bottom: 0;
-  font-size: 0.9rem;
-  font-weight: 300;
+  font-size: 0.7rem;
+  font-weight: 600;
   letter-spacing: var(--mainSpacing);
+}
+
+.price-top p {
+  margin: 0;
+  font-size: 0.4rem;
+  opacity: 0.8;
 }
 
 .room-link {
@@ -598,7 +627,8 @@ h6 {
   top: 50%;
   left: 50%;
   transform: scale(0);
-  transition: all 0.3s linear;
+  transition: all 0.3s ease;
+  z-index: 10;
 }
 
 .img-container:hover {
@@ -607,10 +637,12 @@ h6 {
 
 .img-container:hover img {
   opacity: 0.3;
+  transform: scale(1.05);
 }
 
 .img-container:hover .price-top {
   opacity: 0;
+  transform: translateY(-10px);
 }
 
 .img-container:hover .room-link {
@@ -620,10 +652,51 @@ h6 {
 .car-info {
   background: var(--darkGrey);
   text-transform: capitalize;
-  padding: 0.5rem 0;
+  padding: 0.25rem;
   text-align: center;
   font-weight: 700;
   letter-spacing: var(--mainSpacing);
+  color: var(--mainBlack);
+  min-height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+}
+
+/* Responsive adjustments for car cards */
+@media screen and (max-width: 768px) {
+  .price-top {
+    top: 4px;
+    left: 4px;
+    padding: 0.15rem 0.3rem;
+  }
+
+  .price-top h6 {
+    font-size: 0.6rem;
+  }
+
+  .car-info {
+    padding: 0.2rem;
+    font-size: 0.7rem;
+    min-height: 20px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .price-top {
+    padding: 0.1rem 0.25rem;
+  }
+
+  .price-top h6 {
+    font-size: 0.55rem;
+  }
+
+  .car-info {
+    padding: 0.15rem;
+    font-size: 0.65rem;
+    min-height: 18px;
+  }
 }
 
 /* end of car  */
@@ -637,14 +710,38 @@ h6 {
   width: 80vw;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   grid-row-gap: 2rem;
-  grid-column-gap: 50px;
+  grid-column-gap: 30px;
 }
 
 .single-room-images img {
   width: 100%;
   display: block;
+  border-radius: 8px;
+  box-shadow: var(--lightShadow);
+  transition: var(--mainTransition);
+}
+
+.single-room-images img:hover {
+  box-shadow: var(--darkShadow);
+  transform: scale(1.02);
+}
+
+/* Responsive adjustments for single car images */
+@media screen and (max-width: 768px) {
+  .single-room-images {
+    grid-template-columns: 1fr;
+    width: 90vw;
+    grid-row-gap: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .single-room-images {
+    width: 95vw;
+    grid-row-gap: 1rem;
+  }
 }
 
 .single-room-info {
@@ -725,14 +822,25 @@ h6 {
   width: 80vw;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(272px, 1fr));
-  grid-row-gap: 2rem;
-  grid-column-gap: 30px;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  grid-row-gap: 1rem;
+  grid-column-gap: 15px;
 }
 
-@media screen and (min-width: 776px) {
+@media screen and (max-width: 768px) {
   .carslist-center {
     width: 90vw;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    grid-column-gap: 12px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .carslist-center {
+    width: 95vw;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    grid-row-gap: 0.8rem;
+    grid-column-gap: 8px;
   }
 }
 
@@ -740,6 +848,7 @@ h6 {
   .carslist-center {
     width: 95vw;
     max-width: 1170px;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   }
 }
 

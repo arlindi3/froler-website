@@ -25,9 +25,9 @@ export default class SingleCar extends Component {
     if (!car) {
       return (
         <div className="error">
-          <h3>Car not available...</h3>
+          <h3>Makina nuk është në dispozicion...</h3>
           <Link to="/Makinat" className="btn-primary">
-            Back to cars
+            Ktheu tek makinat
           </Link>
         </div>
       );
@@ -42,6 +42,7 @@ export default class SingleCar extends Component {
       gps,
       sportPackage,
       images,
+      year,
     } = car;
     const [mainImg, ...defaultImg] = images;
 
@@ -50,7 +51,7 @@ export default class SingleCar extends Component {
         <StyledHeroBackground img={mainImg || this.state.defaultBcg}>
           <Banner title={`${name}`}>
             <Link to="/Makinat" className="btn-primary">
-              Back to cars
+              Kthehu tek makinat
             </Link>
           </Banner>
         </StyledHeroBackground>
@@ -63,25 +64,33 @@ export default class SingleCar extends Component {
           </div>
           <div className="single-room-info">
             <article className="desc">
-              <h3>details</h3>
+              <h3>detajet</h3>
               <p>{description}</p>
             </article>
             <article className="info">
               <h3>info</h3>
-              <h6>price: ${price}</h6>
-              <h6>Fuel Tank: {size} L</h6>
-              <h6>Manufacturer: {carMake}</h6>
               <h6>
-                Sport Package:{" "}
-                {sportPackage ? "high performance sport motor" : "unavailable"}
+                çmimi: €
+                {typeof price === "number"
+                  ? price.toLocaleString("de-DE")
+                  : price}
               </h6>
-              <h6>GPS: {gps ? "included" : "unavailable"}</h6>
+              <h6>Kapaciteti Sabratorit: {size} L</h6>
+              <h6>Prodhuesi: {carMake}</h6>
+              <h6>
+                Paketa Sportive:{" "}
+                {sportPackage
+                  ? "motor sportiv me performancë të lartë"
+                  : "i padisponueshëm"}
+              </h6>
+              <h6>GPS: {gps ? "e përfshirë" : "i padisponueshëm"}</h6>
+              <h6>Viti: {year}</h6>
             </article>
           </div>
         </section>
 
         <section className="car-extras">
-          <h6>premium features</h6>
+          <h6>Veçoritë premium</h6>
           <ul className="extras">
             {extras.map((item, index) => {
               return <li key={index}>- {item}</li>;

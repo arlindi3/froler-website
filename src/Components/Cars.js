@@ -21,7 +21,23 @@ const Cars = () => {
             </span>
           }
         >
-          <Link to="/" className="btn-primary">
+          <Link
+            to="/"
+            className="btn-primary"
+            style={{
+              color: "#fff",
+              backgroundColor: "#0a3d5c",
+              border: "none",
+              padding: "0.7rem 2rem",
+              fontWeight: "500",
+              fontSize: "1rem",
+              borderRadius: "3px",
+              letterSpacing: "0.5px",
+              boxShadow: "none",
+              textShadow: "none",
+              transition: "background 0.2s, color 0.2s",
+            }}
+          >
             Ktheu tek Kryesoret
           </Link>
         </Banner>

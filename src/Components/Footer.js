@@ -173,7 +173,7 @@ const Footer = () => {
               <FaMapMarkerAlt /> Autostrada Tiranë-Durrës Km33
             </p>
             <p>
-              <FaPhone /> +355 69 231 1606
+              <FaPhone /> +355 69 609 6666
             </p>
             <p>
               <FaEnvelope /> autofroler@gmail.com
@@ -222,10 +222,14 @@ const Footer = () => {
                   fontWeight: "bold",
                   padding: "0 4px",
                   borderRadius: "4px",
-                  background: "linear-gradient(90deg,#003366 40%,#0056b3 100%)",
+                  fontFamily:
+                    "'Montserrat', 'Segoe UI', 'Roboto', Arial, sans-serif",
+                  letterSpacing: "1px",
+                  fontStyle: "italic",
+                  fontSize: "1.08rem",
                   transition: "background 0.2s, color 0.2s",
                   boxShadow: "0 2px 8px rgba(0,123,255,0.15)",
-                  textDecoration: "none", // <-- removes underline
+                  textDecoration: "none",
                 }}
               >
                 AuraBrand Studio
