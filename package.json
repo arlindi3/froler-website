@@ -1,21 +1,24 @@
 {
-  "homepage": "https://arlindi3.github.io/froler-website",
   "name": "dealership",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
     "contentful": "^10.6.22",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
-    "react-scripts": "^5.0.1",
+    "eslint-config-react-app": "^7.0.1",
+    "firebase": "^12.10.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-scripts": "5.0.1",
     "styled-components": "^4.4.1"
+  },
+  "overrides": {
+    "underscore": "1.13.7"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "fix-cors": "node fix-cors.js"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -33,6 +36,7 @@
     ]
   },
   "devDependencies": {
+    "@google-cloud/storage": "^7.19.0",
     "@types/react-router-dom": "^5.3.3",
     "gh-pages": "^6.3.0",
     "react-icons": "^3.8.0",

@@ -73,3 +73,49 @@
   font-size: 0.8rem;
   color: rgba(255, 255, 255, 0.6);
 }
+
+/* Footer responsive */
+@media screen and (max-width: 768px) {
+  .footer {
+    padding: 1.5rem 1rem 1rem;
+  }
+
+  .footer-columns {
+    flex-direction: column;
+    gap: 1.5rem;
+    text-align: center;
+  }
+
+  .footer-section {
+    width: 100%;
+  }
+
+  .footer-section p {
+    justify-content: center;
+  }
+
+  .footer-socials {
+    text-align: center;
+  }
+
+  .footer-socials a {
+    margin: 0 0.5rem;
+    font-size: 1.2rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .footer {
+    padding: 1.2rem 0.8rem 0.8rem;
+    font-size: 0.8rem;
+  }
+
+  .footer-section h4 {
+    font-size: 0.95rem;
+  }
+
+  .footer-bottom {
+    font-size: 0.7rem;
+    padding-top: 0.8rem;
+  }
+}

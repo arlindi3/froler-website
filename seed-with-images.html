@@ -1,0 +1,525 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Froler — Seed Cars with Images to Firebase</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: "Segoe UI", sans-serif;
+        background: #0f172a;
+        color: #e2e8f0;
+        min-height: 100vh;
+        padding: 2rem;
+      }
+      .container {
+        max-width: 700px;
+        margin: 0 auto;
+      }
+      h1 {
+        font-size: 1.6rem;
+        margin-bottom: 0.3rem;
+        color: #f8fafc;
+      }
+      .subtitle {
+        color: #94a3b8;
+        margin-bottom: 1.5rem;
+        font-size: 0.9rem;
+      }
+      .card {
+        background: #1e293b;
+        border-radius: 12px;
+        padding: 1.5rem;
+        margin-bottom: 1rem;
+        border: 1px solid #334155;
+      }
+      .card h3 {
+        font-size: 1rem;
+        color: #e9bc7d;
+        margin-bottom: 0.3rem;
+      }
+      .card p {
+        font-size: 0.85rem;
+        color: #94a3b8;
+      }
+      .btn {
+        display: inline-block;
+        padding: 0.75rem 1.5rem;
+        border: none;
+        border-radius: 8px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      .btn-seed {
+        background: #16a34a;
+        color: white;
+        margin-right: 0.5rem;
+      }
+      .btn-seed:hover {
+        background: #15803d;
+      }
+      .btn-seed:disabled {
+        background: #334155;
+        color: #64748b;
+        cursor: not-allowed;
+      }
+      .btn-clear {
+        background: #dc2626;
+        color: white;
+      }
+      .btn-clear:hover {
+        background: #b91c1c;
+      }
+      .btn-clear:disabled {
+        background: #334155;
+        color: #64748b;
+        cursor: not-allowed;
+      }
+      .actions {
+        margin: 1.5rem 0;
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+      }
+      .log {
+        background: #0f172a;
+        border: 1px solid #334155;
+        border-radius: 8px;
+        padding: 1rem;
+        max-height: 300px;
+        overflow-y: auto;
+        font-family: monospace;
+        font-size: 0.82rem;
+        line-height: 1.6;
+      }
+      .log-ok {
+        color: #4ade80;
+      }
+      .log-err {
+        color: #f87171;
+      }
+      .log-info {
+        color: #60a5fa;
+      }
+      .warn {
+        background: #422006;
+        border: 1px solid #854d0e;
+        color: #fbbf24;
+        padding: 0.8rem 1rem;
+        border-radius: 8px;
+        margin-bottom: 1rem;
+        font-size: 0.85rem;
+      }
+      .note {
+        background: #1e1b4b;
+        border: 1px solid #4338ca;
+        color: #a5b4fc;
+        padding: 0.8rem 1rem;
+        border-radius: 8px;
+        margin-bottom: 1rem;
+        font-size: 0.85rem;
+      }
+      .note code {
+        background: #312e81;
+        padding: 2px 6px;
+        border-radius: 4px;
+      }
+      .step {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.5rem;
+        margin-bottom: 0.4rem;
+      }
+      .step-num {
+        background: #e9bc7d;
+        color: #0f172a;
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.75rem;
+        font-weight: 700;
+        flex-shrink: 0;
+        margin-top: 2px;
+      }
+      .input-group {
+        margin-bottom: 1rem;
+      }
+      .input-group label {
+        display: block;
+        font-size: 0.85rem;
+        color: #94a3b8;
+        margin-bottom: 0.3rem;
+      }
+      .input-group input {
+        width: 100%;
+        padding: 0.6rem 0.8rem;
+        background: #0f172a;
+        border: 1px solid #334155;
+        border-radius: 6px;
+        color: #e2e8f0;
+        font-size: 0.9rem;
+      }
+      .input-group input:focus {
+        outline: none;
+        border-color: #e9bc7d;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <h1>🚗 Auto Froler — Seed Firebase</h1>
+      <p class="subtitle">Shto 4 makinat me fotografi në Firestore</p>
+
+      <div class="note">
+        <strong>Si funksionon:</strong> Fotografitë do të ruhen si URL të GitHub
+        Pages (build i deployuar). Sigurohu që ke bërë
+        <code>npm run deploy</code> në mënyrë që fotografitë të jenë live.
+      </div>
+
+      <div class="input-group">
+        <label>GitHub Pages Base URL (pa / në fund)</label>
+        <input
+          type="text"
+          id="baseUrl"
+          value="https://arlindi3.github.io/froler-website"
+          placeholder="https://arlindi3.github.io/froler-website"
+        />
+      </div>
+
+      <div class="warn" id="ruleWarn" style="display: none">
+        ⚠️ Nëse merr gabim "permission-denied", shko te
+        <a
+          href="https://console.firebase.google.com/project/froler/firestore/rules"
+          target="_blank"
+          style="color: #fbbf24"
+          >Firebase → Firestore Rules</a
+        >
+        dhe vendos: <code>allow read, write: if true;</code>
+      </div>
+
+      <div class="actions">
+        <button class="btn btn-seed" id="seedBtn" onclick="seedData()">
+          📥 Importo 4 Makina me Foto
+        </button>
+        <button class="btn btn-clear" id="clearBtn" onclick="clearAllCars()">
+          🗑️ Pastro Firestore
+        </button>
+      </div>
+
+      <div id="carCards"></div>
+
+      <h3 style="margin: 1rem 0 0.5rem; font-size: 0.95rem">Log:</h3>
+      <div class="log" id="logBox">
+        <div class="log-info">Gati për import. Kliko butonin sipër.</div>
+      </div>
+    </div>
+
+    <!-- Firebase CDN (compat) -->
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore-compat.js"></script>
+
+    <script>
+      firebase.initializeApp({
+        apiKey: "AIzaSyClMnKVwb63TvnneJ0hA9Las2LcMcLwLrw",
+        authDomain: "froler.firebaseapp.com",
+        projectId: "froler",
+        storageBucket: "froler.firebasestorage.app",
+        messagingSenderId: "4541172773",
+        appId: "1:4541172773:web:c31a682999c9d3e9d503cc",
+      });
+      const db = firebase.firestore();
+
+      // Image filenames from the build (with hashes)
+      const IMG = {
+        car1: "car1.7276790015b0b2485c97.jpeg",
+        details1: "details1.36fefde7401c5da1d9e0.jpeg",
+        details2: "details2.71a085637dc40504eb08.jpeg",
+        details3: "details3.533e3a348845a4cf5de7.jpeg",
+        details4: "details4.b8b83bb5c6a8fd7f4884.jpeg",
+        details5: "details5.c4bb1dd08e772d5e7296.jpeg",
+        details6: "details6.316d9cc7ddc14e938179.jpeg",
+        details7: "details7.e4709daf51800787904d.jpeg",
+
+        car2: "car2.9ed4cca8de64486a685d.jpeg",
+        detailsCls1: "detailsCls1.ac2b2ca5c09dbbf1a988.jpeg",
+        detailsCls2: "detailsCls%20(2).55b03810998df5e19165.jpeg",
+        detailsCls3: "detailsCls%20(3).8601a69ae21a62071d17.jpeg",
+        detailsCls4: "detailsCls%20(4).56d95d6461bdd40c872a.jpeg",
+        detailsCls5: "detailsCls%20(5).7c753b438c28f4b259a3.jpeg",
+        detailsCls6: "detailsCls%20(6).a4e449809b77120239c0.jpeg",
+        detailsCls7: "detailsCls%20(7).afa00866cf797b18610c.jpeg",
+        detailsCls8: "detailsCls%20(8).da4034b3ac91199cdf68.jpeg",
+        detailsCls9: "detailsCls%20(9).fadaa93e0ac18f3df749.jpeg",
+
+        car3: "car3.6115603b5dc594d40bd2.jpeg",
+        detailsGle1: "detailsGle%20(1).47f832b8ce753051a766.jpeg",
+        detailsGle2: "detailsGle%20(2).5b169be60c920d81527c.jpeg",
+        detailsGle3: "detailsGle%20(3).e4003b76880c8fd4b97a.jpeg",
+        detailsGle4: "detailsGle%20(4).52813143f12049ae95d2.jpeg",
+        detailsGle5: "detailsGle%20(5).4d8014d793420f2e9eb8.jpeg",
+        detailsGle6: "detailsGle%20(6).f4ffb55914261fe793b9.jpeg",
+        detailsGle7: "detailsGle%20(7).b5387058255ef51d1af3.jpeg",
+        detailsGle8: "detailsGle%20(8).fef0b0c640b3df6cb898.jpeg",
+
+        car4: "car4.c5f010954434d75cbc6d.jpeg",
+        detailsRR1: "detailsRangeRover%20(1).7da755bfd9b170b10af1.jpg",
+        detailsRR2: "detailsRangeRover%20(2).c1b9279f3c08defc9342.jpg",
+        detailsRR3: "detailsRangeRover%20(3).2b0c204763c828eb19d4.jpg",
+        detailsRR4: "detailsRangeRover%20(4).ad41086ad68de9527dee.jpg",
+        detailsRR5: "detailsRangeRover%20(5).c99372d4a7582961ee3c.jpg",
+        detailsRR6: "detailsRangeRover%20(6).9b869a72d581bfa929f6.jpg",
+      };
+
+      function imgUrl(key) {
+        const base = document
+          .getElementById("baseUrl")
+          .value.replace(/\/+$/, "");
+        return base + "/static/media/" + IMG[key];
+      }
+
+      function getCars() {
+        return [
+          {
+            name: "Mercedes-Benz GLC 250d 4MATIC",
+            slug: "mercedes-glc",
+            type: "SUV",
+            price: 25000,
+            km: "",
+            year: 2019,
+            size: 72,
+            carMake: "Mercedes-Benz",
+            gps: true,
+            sportPackage: false,
+            featured: false,
+            description:
+              "🚗 Shitet Mercedes-Benz GLC 250d 4MATIC – Viti 2016 🇨🇭 Importuar nga Zvicra – Gjendje perfekte! ✨ Full opsion 🔧4x4 (4MATIC) – Gati për çdo terren",
+            extras: [
+              "Navigator + GPS",
+              "Kamera parkimi + sensor parkimi",
+              "Sallon lekure",
+              "Distronic (ruajtje distance automatike)",
+              "Drita Bi-Xenon & LED",
+              "4x4 (4MATIC)",
+            ],
+            images: [
+              imgUrl("car1"),
+              imgUrl("details1"),
+              imgUrl("details2"),
+              imgUrl("details3"),
+              imgUrl("details4"),
+              imgUrl("details5"),
+              imgUrl("details6"),
+              imgUrl("details7"),
+            ],
+          },
+          {
+            name: "Mercedes CLS 450 AMG",
+            slug: "mercedes-cls",
+            type: "SEDAN",
+            price: "Kontakto",
+            km: "11.000",
+            year: 2019,
+            size: 72,
+            carMake: "Mercedes-Benz",
+            gps: true,
+            sportPackage: true,
+            featured: false,
+            description:
+              "🚘 Mercedes CLS 450 AMG📅 Viti: 2019 | 🛢️ 3.0 Benzin Vetem 11.000Km✨ Look AMG nga fabrika — elegancë dhe agresivitet në një trup të vetëm!",
+            extras: [
+              "Kamera 360° & Sensorë 360°",
+              "Hapse panoramike xhami për një përvojë luksoze",
+              "Distronic Plus – lëviz me siguri maksimale",
+              "Blind Spot Assist – gjithmonë në kontroll",
+              "Asistencë korsie",
+              "Sedilje me memorie + ngrohje + ftohje",
+              "Sistemi audio Burmester – muzika si në studio",
+            ],
+            images: [
+              imgUrl("car2"),
+              imgUrl("detailsCls1"),
+              imgUrl("detailsCls2"),
+              imgUrl("detailsCls3"),
+              imgUrl("detailsCls4"),
+              imgUrl("detailsCls5"),
+              imgUrl("detailsCls6"),
+              imgUrl("detailsCls7"),
+              imgUrl("detailsCls8"),
+              imgUrl("detailsCls9"),
+            ],
+          },
+          {
+            name: "Mercedes GLE 350d 4MATIC - AMG Look",
+            slug: "mercedes-gle",
+            type: "SUV",
+            price: "Kontakto",
+            km: "130.000",
+            year: 2020,
+            size: 72,
+            carMake: "Mercedes-Benz",
+            gps: true,
+            sportPackage: false,
+            featured: false,
+            description:
+              "📢 Shitet Mercedes GLE 350d 4MATIC - AMG Look 📆 Viti: 2020 ℹ️130,000Km 🖤 Ngjyrë: E zezë",
+            extras: [
+              "Panoram",
+              "Burmester",
+              "Hapje mbyllje ndezje pa çelës",
+              "Head Up Display",
+              "Dritat Full Led Inteligjente",
+              "Camera 360°",
+              "Distronic + Asistencë Korsie",
+            ],
+            images: [
+              imgUrl("car3"),
+              imgUrl("detailsGle1"),
+              imgUrl("detailsGle2"),
+              imgUrl("detailsGle3"),
+              imgUrl("detailsGle4"),
+              imgUrl("detailsGle5"),
+              imgUrl("detailsGle6"),
+              imgUrl("detailsGle7"),
+              imgUrl("detailsGle8"),
+            ],
+          },
+          {
+            name: "Range Rover Vogue 4.4 TDV8 – Facelift",
+            slug: "range-vogue",
+            type: "SUV",
+            price: "Kontakto",
+            km: "",
+            year: 2019,
+            size: 72,
+            carMake: "Range-Rover",
+            gps: true,
+            sportPackage: true,
+            featured: false,
+            description:
+              "🇩🇪🇩🇪Range Rover Vogue 4.4 TDV8 – 2019 Facelift Luks, fuqi dhe rehati në maksimum!🇩🇪🇩🇪 Importuar Nga Gjermania",
+            extras: [
+              "Panoram & Head-Up Display",
+              "360° Kamera & Sedilje me memorie, ngrohje, ftohje, masazh",
+              "Dyer me thithje & Hapje Mbyllje Ndezje pa çelës",
+              "Klimë 3-zonëshe",
+            ],
+            images: [
+              imgUrl("car4"),
+              imgUrl("detailsRR1"),
+              imgUrl("detailsRR2"),
+              imgUrl("detailsRR3"),
+              imgUrl("detailsRR4"),
+              imgUrl("detailsRR5"),
+              imgUrl("detailsRR6"),
+            ],
+          },
+        ];
+      }
+
+      // Render card preview
+      function renderCards() {
+        const cars = getCars();
+        const html = cars
+          .map(
+            (c) => `
+        <div class="card">
+          <h3>${c.name}</h3>
+          <p>${c.type} · ${c.year} · ${typeof c.price === "number" ? "€" + c.price.toLocaleString() : c.price} · ${c.images.length} foto</p>
+        </div>
+      `,
+          )
+          .join("");
+        document.getElementById("carCards").innerHTML = html;
+      }
+      renderCards();
+      document.getElementById("baseUrl").addEventListener("input", renderCards);
+
+      function log(msg, cls = "log-info") {
+        const box = document.getElementById("logBox");
+        box.innerHTML += `<div class="${cls}">${msg}</div>`;
+        box.scrollTop = box.scrollHeight;
+      }
+
+      async function seedData() {
+        const btn = document.getElementById("seedBtn");
+        btn.disabled = true;
+        btn.textContent = "⏳ Duke importuar...";
+        document.getElementById("logBox").innerHTML = "";
+        document.getElementById("ruleWarn").style.display = "none";
+
+        const cars = getCars();
+        let ok = 0,
+          fail = 0;
+
+        for (const car of cars) {
+          try {
+            log(`📤 Duke shtuar: ${car.name}...`);
+            await db.collection("cars").add({
+              ...car,
+              createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+              updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
+            });
+            ok++;
+            log(`✅ ${car.name} — ${car.images.length} foto`, "log-ok");
+          } catch (err) {
+            fail++;
+            log(`❌ ${car.name}: ${err.message}`, "log-err");
+            if (err.code === "permission-denied") {
+              document.getElementById("ruleWarn").style.display = "block";
+            }
+          }
+        }
+
+        log(
+          `\n🏁 Përfundoi: ${ok} sukses, ${fail} gabime`,
+          ok === cars.length ? "log-ok" : "log-err",
+        );
+        btn.disabled = false;
+        btn.textContent = "📥 Importo 4 Makina me Foto";
+      }
+
+      async function clearAllCars() {
+        const btn = document.getElementById("clearBtn");
+        if (
+          !confirm(
+            "A jeni i sigurt? Kjo do të fshijë TË GJITHA makinat në Firestore.",
+          )
+        )
+          return;
+        btn.disabled = true;
+        btn.textContent = "⏳ Duke fshirë...";
+        document.getElementById("logBox").innerHTML = "";
+
+        try {
+          const snap = await db.collection("cars").get();
+          if (snap.empty) {
+            log("Nuk ka makina për tu fshirë.", "log-info");
+          } else {
+            const batch = db.batch();
+            snap.docs.forEach((doc) => batch.delete(doc.ref));
+            await batch.commit();
+            log(`🗑️ U fshinë ${snap.size} makina.`, "log-ok");
+          }
+        } catch (err) {
+          log(`❌ Gabim: ${err.message}`, "log-err");
+          if (err.code === "permission-denied") {
+            document.getElementById("ruleWarn").style.display = "block";
+          }
+        }
+
+        btn.disabled = false;
+        btn.textContent = "🗑️ Pastro Firestore";
+      }
+    </script>
+  </body>
+</html>

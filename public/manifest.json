@@ -1,6 +1,7 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Auto Froler",
+  "name": "Auto Froler – Shitje Makinash në Shqipëri",
+  "description": "Salloni i makinave Auto Froler. Blini makina të reja dhe të përdorura në Shqipëri.",
   "icons": [
     {
       "src": "favicon.ico",
@@ -18,8 +19,10 @@
       "sizes": "512x512"
     }
   ],
-  "start_url": ".",
+  "start_url": "/",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#0A3D5C",
+  "background_color": "#ffffff",
+  "lang": "sq",
+  "categories": ["automotive", "shopping"]
 }

@@ -1,31 +1,112 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="sq">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" href="%PUBLIC_URL%/logo-bg.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta name="description" content="Auto Froler" />
-    <link rel="apple-touch-icon" href="logo192.png" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
+    <meta name="theme-color" content="#0A3D5C" />
 
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>Auto Froler</title>
+    <!-- Primary SEO -->
+    <title>
+      Auto Froler | Makina me Çmime të Ulëta – Autostrada Tiranë-Durrës
+    </title>
+    <meta
+      name="description"
+      content="Auto Froler – Salloni i makinave në Autostradën Tiranë–Durrës Km33. Blini makina të përdorura dhe të reja me çmime konkurruese në Shqipëri. Shërbim, test drive dhe servis profesional."
+    />
+    <meta
+      name="keywords"
+      content="makina shitje Shqiperi, auto salloni Tirane, makina te perdorura Shqiperi, makina Durres, auto froler, blerje makine Tirane, car dealership Albania, shitje makinash, makina me çmim te mire, servis makine Shqiperi, auto shqiperi"
+    />
+    <meta name="author" content="Auto Froler" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://www.autofroler.al/" />
+
+    <!-- Geo targeting – Albania -->
+    <meta name="geo.region" content="AL" />
+    <meta name="geo.placename" content="Durrës, Shqipëri" />
+    <meta name="geo.position" content="41.339004;19.487864" />
+    <meta name="ICBM" content="41.339004, 19.487864" />
+
+    <!-- Open Graph (Facebook, WhatsApp previews) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://www.autofroler.al/" />
+    <meta
+      property="og:title"
+      content="Auto Froler | Makina me Çmime të Ulëta – Shqipëri"
+    />
+    <meta
+      property="og:description"
+      content="Salloni i makinave Auto Froler në Autostradën Tiranë–Durrës Km33. Blini makina të reja dhe të përdorura, servis profesional."
+    />
+    <meta property="og:image" content="%PUBLIC_URL%/logo-bg.png" />
+    <meta property="og:locale" content="sq_AL" />
+    <meta property="og:site_name" content="Auto Froler" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Auto Froler | Makina me Çmime të Ulëta – Shqipëri"
+    />
+    <meta
+      name="twitter:description"
+      content="Blini makina të reja dhe të përdorura në Shqipëri. Auto Froler – Autostrada Tiranë–Durrës Km33."
+    />
+    <meta name="twitter:image" content="%PUBLIC_URL%/logo-bg.png" />
+
+    <!-- Structured Data – Local Business / Auto Dealer -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "AutoDealer",
+        "name": "Auto Froler",
+        "url": "https://www.autofroler.al",
+        "logo": "https://www.autofroler.al/logo-bg.png",
+        "image": "https://www.autofroler.al/logo-bg.png",
+        "description": "Salloni i makinave Auto Froler – shitje makinash të reja dhe të përdorura, servis, test drive. I vendosur në Autostradën Tiranë–Durrës Km33, Shqipëri.",
+        "telephone": "+355696096666",
+        "priceRange": "$$",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Autostrada Tiranë–Durrës, Km 33",
+          "addressLocality": "Durrës",
+          "postalCode": "2021",
+          "addressCountry": "AL"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 41.3390041,
+          "longitude": 19.4878644
+        },
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": [
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday"
+            ],
+            "opens": "08:00",
+            "closes": "19:00"
+          }
+        ],
+        "sameAs": [
+          "https://www.facebook.com/autofroler",
+          "https://www.instagram.com/autofroler"
+        ]
+      }
+    </script>
+
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo-bg.png" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
   </head>
 
   <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <noscript>Duhet të aktivizoni JavaScript për të hapur këtë faqe.</noscript>
     <div id="root"></div>
     <!--
       This HTML file is a template.

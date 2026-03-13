@@ -87,6 +87,11 @@
 }
 
 @media (max-width: 700px) {
+  .rrethnesh-container {
+    margin: 1.5rem 0.8rem;
+    padding: 1.5rem 1rem;
+    border-radius: 12px;
+  }
   .rrethnesh-content {
     flex-direction: column;
     gap: 1.2rem;
@@ -96,5 +101,29 @@
   }
   .rrethnesh-title {
     font-size: 1.4rem;
+  }
+  .rrethnesh-lead {
+    font-size: 1rem;
+    margin-bottom: 1.5rem;
+  }
+  .rrethnesh-quote {
+    padding: 1rem;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .rrethnesh-container {
+    margin: 1rem 0.5rem;
+    padding: 1.2rem 0.8rem;
+  }
+  .rrethnesh-title {
+    font-size: 1.2rem;
+  }
+  .rrethnesh-lead {
+    font-size: 0.9rem;
+  }
+  .rrethnesh-list li {
+    font-size: 0.9rem;
   }
 }

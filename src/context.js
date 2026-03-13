@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-// import items from './data';
-// import Client from './Contentful';
+import { collection, onSnapshot, query, orderBy } from "firebase/firestore";
+import { db } from "./firebase";
 import carsData from "./data";
 
 const CarContext = React.createContext();
@@ -23,74 +23,84 @@ class CarProvider extends Component {
     sportPackage: false,
   };
 
-  // Get API data
-  // getAPIData = async () => {
-  //   try {
-  //     let response = await Client.getEntries({
-  //       content_type: "carDealershipCars",
-  //       order: "sys.createdAt"
-  //     });
+  // Unsubscribe function for Firestore listener
+  unsubscribe = null;
 
-  //     let cars = this.formatData(response.items);
-  //     // return featured cars from array
-  //     let featuredCars = cars.filter(car => car.featured === true);
-  //     //calculate default maximum price for each item in Array
-  //     let maxPrice = Math.max(...cars.map(car => car.price));
-  //     //calculate default maximum size for each item in Array
-  //     let maxSize = Math.max(...cars.map(car => car.size));
-
-  //     this.setState({
-  //       cars,
-  //       featuredCars,
-  //       sortedCars: cars,
-  //       loading: false,
-  //       price: maxPrice,
-  //       maxPrice,
-  //       maxSize,
-
-  //     });
-  //   } catch (error) {
-  //     console.log(error)
-  //   }
-  // }
-
-  // Get local data
   componentDidMount() {
-    // this.getAPIData()
-    let cars = this.formatData(carsData);
-
-    // return featured cars from array
-    let featuredCars = cars.filter((car) => car.featured === true);
-
-    //calculate default maximum price for each item in Array
-    let maxPrice = Math.max(
-      ...cars.map((car) => (typeof car.price === "number" ? car.price : 0))
-    );
-    //calculate default maximum size for each item in Array
-    let maxSize = Math.max(...cars.map((car) => car.size));
-
-    this.setState({
-      cars,
-      featuredCars,
-      sortedCars: cars,
-      loading: false,
-      price: maxPrice,
-      maxPrice,
-      maxSize,
-    });
+    // Try to load from Firebase Firestore first
+    try {
+      const q = query(collection(db, "cars"), orderBy("createdAt", "desc"));
+      this.unsubscribe = onSnapshot(
+        q,
+        (snapshot) => {
+          if (!snapshot.empty) {
+            // Cars found in Firestore – use Firebase data
+            const cars = snapshot.docs.map((doc) => ({
+              id: doc.id,
+              ...doc.data(),
+              // Ensure images is always an array
+              images: Array.isArray(doc.data().images) ? doc.data().images : [],
+              // Ensure extras is always an array
+              extras: Array.isArray(doc.data().extras) ? doc.data().extras : [],
+            }));
+            this.applyCarState(cars);
+          } else {
+            // Firestore is empty – fall back to local static data
+            this.loadStaticData();
+          }
+        },
+        (error) => {
+          // Firestore not set up yet – fall back to static data silently
+          this.loadStaticData();
+        },
+      );
+    } catch (error) {
+      // Firebase config missing – fall back to static data
+      console.warn("Firebase error, using static data:", error.message);
+      this.loadStaticData();
+    }
   }
 
-  // Flattening data.js Array
+  componentWillUnmount() {
+    if (this.unsubscribe) this.unsubscribe();
+  }
+
+  loadStaticData = () => {
+    const cars = this.formatData(carsData);
+    this.applyCarState(cars);
+  };
+
+  applyCarState = (cars) => {
+    const featuredCars = cars.filter((car) => car.featured === true);
+    const maxPrice = Math.max(
+      ...cars.map((car) => (typeof car.price === "number" ? car.price : 0)),
+    );
+    const maxSize = Math.max(
+      ...cars.map((car) => (typeof car.size === "number" ? car.size : 0)),
+    );
+
+    this.setState(
+      {
+        cars,
+        featuredCars,
+        sortedCars: cars,
+        loading: false,
+        price: maxPrice,
+        maxPrice,
+        maxSize,
+      },
+      this.filterCars,
+    );
+  };
+
+  // Flatten legacy local data.js structure
   formatData = (items) => {
     let tempItems = items.map((item) => {
       let id = item.sys.id;
       let images = item.fields.images.map((image) => image.fields.file.url);
-
-      // Copy of fields object from data.js and return
       let car = { ...item.fields, images, id };
       return car;
     });
-
     return tempItems;
   };
 
@@ -111,7 +121,7 @@ class CarProvider extends Component {
       {
         [name]: value,
       },
-      this.filterCars
+      this.filterCars,
     );
 
     // console.log(`type: ${type}, name: ${name}, value: ${value}`)
@@ -140,14 +150,14 @@ class CarProvider extends Component {
     // ---------------------------------------------------------
     //Filter by price
     tempCars = tempCars.filter((car) =>
-      typeof car.price === "number" ? car.price <= price : true
+      typeof car.price === "number" ? car.price <= price : true,
     );
 
     // ---------------------------------------------------------
 
     // Filter by size
     tempCars = tempCars.filter(
-      (car) => car.size >= minSize && car.size <= maxSize
+      (car) => car.size >= minSize && car.size <= maxSize,
     );
 
     // ---------------------------------------------------------

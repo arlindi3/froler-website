@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Seed Cars to Firebase</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        max-width: 700px;
+        margin: 40px auto;
+        padding: 20px;
+        background: #f5f5f5;
+      }
+      h1 {
+        color: #333;
+      }
+      button {
+        background: #4caf50;
+        color: white;
+        border: none;
+        padding: 14px 28px;
+        font-size: 16px;
+        border-radius: 6px;
+        cursor: pointer;
+        margin-bottom: 20px;
+      }
+      button:disabled {
+        background: #aaa;
+        cursor: not-allowed;
+      }
+      .log {
+        background: white;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        padding: 16px;
+        min-height: 100px;
+        font-family: monospace;
+        font-size: 14px;
+        white-space: pre-wrap;
+      }
+      .ok {
+        color: green;
+      }
+      .err {
+        color: red;
+      }
+      .info {
+        color: #555;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>🚗 Auto Froler — Seed Cars to Firebase</h1>
+    <p>
+      Click the button to add all 4 cars to Firestore. If a car already exists
+      (same slug), it will be skipped.
+    </p>
+    <button id="btn" onclick="seedCars()">▶ Add Cars to Firebase</button>
+    <div class="log" id="log">Ready. Press the button to start...\n</div>
+
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+      import {
+        getFirestore,
+        collection,
+        addDoc,
+        getDocs,
+        query,
+        where,
+        serverTimestamp,
+      } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyClMnKVwb63TvnneJ0hA9Las2LcMcLwLrw",
+        authDomain: "froler.firebaseapp.com",
+        projectId: "froler",
+        storageBucket: "froler.firebasestorage.app",
+        messagingSenderId: "4541172773",
+        appId: "1:4541172773:web:c31a682999c9d3e9d503cc",
+      };
+
+      const app = initializeApp(firebaseConfig);
+      const db = getFirestore(app);
+
+      const cars = [
+        {
+          name: "Mercedes-Benz GLC 250d 4MATIC",
+          slug: "mercedes-glc",
+          type: "SUV",
+          price: 25000,
+          km: "",
+          year: 2019,
+          size: 72,
+          carMake: "Mercedes-Benz",
+          gps: true,
+          sportPackage: false,
+          featured: false,
+          description:
+            "🚗 Shitet Mercedes-Benz GLC 250d 4MATIC – Viti 2016 🇨🇭 Importuar nga Zvicra – Gjendje perfekte! ✨ Full opsion 🔧4x4 (4MATIC) – Gati për çdo terren",
+          extras: [
+            "Navigator + GPS",
+            "Kamera parkimi + sensor parkimi",
+            "Sallon lekure",
+            "Distronic (ruajtje distance automatike)",
+            "Drita Bi-Xenon & LED",
+            "4x4 (4MATIC)",
+          ],
+          images: [],
+        },
+        {
+          name: "Mercedes CLS 450 AMG",
+          slug: "mercedes-cls",
+          type: "SEDAN",
+          price: "Kontakto",
+          km: "11.000",
+          year: 2019,
+          size: 72,
+          carMake: "Mercedes-Benz",
+          gps: true,
+          sportPackage: true,
+          featured: false,
+          description:
+            "🚘 Mercedes CLS 450 AMG📅 Viti: 2019 | 🛢️ 3.0 Benzin Vetem 11.000Km✨ Look AMG nga fabrika — elegancë dhe agresivitet në një trup të vetëm!",
+          extras: [
+            "Kamera 360° & Sensorë 360°",
+            "Hapse panoramike xhami për një përvojë luksoze",
+            "Distronic Plus – lëviz me siguri maksimale",
+            "Blind Spot Assist – gjithmonë në kontroll",
+            "Asistencë korsie",
+            "Sedilje me memorie + ngrohje + ftohje",
+            "Sistemi audio Burmester – muzika si në studio",
+          ],
+          images: [],
+        },
+        {
+          name: "Mercedes GLE 350d 4MATIC - AMG Look",
+          slug: "mercedes-gle",
+          type: "SUV",
+          price: "Kontakto",
+          km: "130.000",
+          year: 2020,
+          size: 72,
+          carMake: "Mercedes-Benz",
+          gps: true,
+          sportPackage: false,
+          featured: false,
+          description:
+            "📢 Shitet Mercedes GLE 350d 4MATIC - AMG Look 📆 Viti: 2020 ℹ️130,000Km 🖤 Ngjyrë: E zezë",
+          extras: [
+            "Panoram",
+            "Burmester",
+            "Hapje mbyllje ndezje pa çelës",
+            "Head Up Display",
+            "Dritat Full Led Inteligjente",
+            "Camera 360°",
+            "Distronic + Asistencë Korsie",
+          ],
+          images: [],
+        },
+        {
+          name: "Range Rover Vogue 4.4 TDV8 – Facelift",
+          slug: "range-vogue",
+          type: "SUV",
+          price: "Kontakto",
+          km: "",
+          year: 2019,
+          size: 72,
+          carMake: "Range-Rover",
+          gps: true,
+          sportPackage: true,
+          featured: false,
+          description:
+            "🇩🇪🇩🇪Range Rover Vogue 4.4 TDV8 – 2019 Facelift Luks, fuqi dhe rehati në maksimum!🇩🇪🇩🇪 Importuar Nga Gjermania",
+          extras: [
+            "Panoram & Head-Up Display",
+            "360° Kamera & Sedilje me memorie, ngrohje, ftohje, masazh",
+            "Dyer me thithje & Hapje Mbyllje Ndezje pa çelës",
+            "Klimë 3-zonëshe",
+          ],
+          images: [],
+        },
+      ];
+
+      window.seedCars = async function () {
+        const btn = document.getElementById("btn");
+        const log = document.getElementById("log");
+        btn.disabled = true;
+        log.innerHTML = "";
+
+        function print(msg, cls = "info") {
+          log.innerHTML += `<span class="${cls}">${msg}</span>\n`;
+        }
+
+        print("🔄 Connecting to Firestore...");
+
+        try {
+          const carsCol = collection(db, "cars");
+
+          for (const car of cars) {
+            print(`\n🚗 Processing: ${car.name}`);
+
+            // Check if already exists
+            const q = query(carsCol, where("slug", "==", car.slug));
+            const existing = await getDocs(q);
+
+            if (!existing.empty) {
+              print(`   ⏩ Already exists — skipped.`, "info");
+              continue;
+            }
+
+            await addDoc(carsCol, {
+              ...car,
+              createdAt: serverTimestamp(),
+            });
+
+            print(`   ✅ Added successfully!`, "ok");
+          }
+
+          print("\n\n🎉 Done! All cars have been processed.", "ok");
+        } catch (err) {
+          print(`\n❌ Error: ${err.message}`, "err");
+          print("Make sure your Firestore rules allow writes.", "err");
+        }
+
+        btn.disabled = false;
+      };
+    </script>
+  </body>
+</html>

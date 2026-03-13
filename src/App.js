@@ -9,25 +9,31 @@ import Footer from "./Components/Footer";
 import { CarProvider } from "./context";
 import Servisi from "./Components/Servisi";
 import RrethNesh from "./Components/RrethNesh";
+import Admin from "./Components/Admin";
 
 import { Route, Switch } from "react-router-dom";
 
 function App() {
   return (
     <CarProvider>
-      <Navbar />
-
       <Switch>
-        <Route exact path="/" component={Home} />
-        <Route exact path="/Makinat" component={Cars} />
-        <Route exact path="/Makinat/:slug" component={SingleCar} />
-        <Route exact path="/Servisi" component={Servisi} />
-        <Route exact path="/Rreth Nesh" component={RrethNesh} />
+        {/* Admin panel – no Navbar/Footer */}
+        <Route path="/admin" component={Admin} />
 
-        <Route component={ErrorPage} />
+        {/* Public site */}
+        <Route>
+          <Navbar />
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/Makinat" component={Cars} />
+            <Route exact path="/Makinat/:slug" component={SingleCar} />
+            <Route exact path="/Servisi" component={Servisi} />
+            <Route exact path="/Rreth Nesh" component={RrethNesh} />
+            <Route component={ErrorPage} />
+          </Switch>
+          <Footer />
+        </Route>
       </Switch>
-
-      <Footer />
     </CarProvider>
   );
 }

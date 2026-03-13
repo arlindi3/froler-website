@@ -1,7 +1,15 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
   <head>
-    <meta http-equiv="refresh" content="0; URL=/froler-website/" />
+    <meta charset="utf-8" />
+    <title>Auto Froler</title>
+    <script>
+      // GitHub Pages BrowserRouter redirect trick
+      // Stores the current path and redirects to index.html
+      var path = window.location.pathname + window.location.search;
+      sessionStorage.setItem("redirect", path);
+      window.location.replace("/froler-website/");
+    </script>
   </head>
   <body></body>
 </html>

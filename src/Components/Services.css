@@ -1,3 +1,51 @@
+.simple-services-center {
+  display: flex;
+  gap: 2.5rem;
+  justify-content: center;
+  align-items: flex-start;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 1rem;
+}
+@media screen and (min-width: 900px) {
+  .simple-card {
+    min-width: 260px;
+    max-width: 320px;
+    background: #f8f9fa;
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(10, 61, 92, 0.08);
+    padding: 2.2rem 1.5rem 2rem 1.5rem;
+    text-align: center;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.2rem;
+  }
+}
+.simple-icon {
+  width: 56px;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #0a3d5c 60%, #e9bc7d 100%);
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(10, 61, 92, 0.08);
+  font-size: 2rem;
+  color: #fff;
+  margin: 0 auto 0.5rem auto;
+  flex-shrink: 0;
+  background: linear-gradient(135deg, #0a3d5c 60%, #e9bc7d 100%);
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(10, 61, 92, 0.08);
+  font-size: 2rem;
+  color: #fff;
+  margin-top: 0.2rem;
+  margin-bottom: 0.5rem;
+  flex-shrink: 0;
+}
 /* Services Section Styles */
 .services {
   padding: 5rem 0;
@@ -74,18 +122,9 @@
 }
 
 .service-icon {
-  display: inline-block;
-  width: 80px;
-  height: 80px;
-  background: linear-gradient(135deg, var(--primaryColor), #e9bc7d);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0 auto 1.5rem;
-  position: relative;
-  overflow: hidden;
-  transition: all 0.3s ease;
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  color: #0a3d5c;
 }
 
 .service-icon::before {
@@ -120,13 +159,10 @@
 }
 
 .service-title {
-  font-size: 1.3rem;
-  color: var(--mainBlack);
-  margin-bottom: 1rem;
+  font-size: 1.1rem;
   font-weight: 600;
-  text-transform: capitalize;
-  letter-spacing: var(--mainSpacing);
-  position: relative;
+  margin-bottom: 0.2rem;
+  color: #0a3d5c;
 }
 
 .service-title::after {
