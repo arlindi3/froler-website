@@ -170,7 +170,7 @@ export default class SingleCar extends Component {
       <>
         <StyledHeroBackground img={mainImg || this.state.defaultBcg}>
           <Banner title={`${name}`}>
-            <Link to="/Makinat" className="btn-primary">
+            <Link to="/makinat" className="btn-primary">
               Kthehu tek makinat
             </Link>
           </Banner>

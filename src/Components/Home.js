@@ -23,23 +23,26 @@ const Home = () => {
           }
         >
           <Link
-            to="/Makinat"
-            className="btn-primary"
+            to="/makinat"
+            className="btn-primary hero-cta"
             style={{
               color: "#fff",
-              backgroundColor: "#0a3d5c",
-              border: "none",
-              padding: "0.7rem 2rem",
-              fontWeight: "500",
-              fontSize: "1rem",
-              borderRadius: "3px",
-              letterSpacing: "0.5px",
-              boxShadow: "none",
+              backgroundColor: "#0A3D5C",
+              border: "2px solid #0A3D5C",
+              padding: "0.85rem 2.8rem",
+              fontWeight: "600",
+              fontSize: "1.05rem",
+              borderRadius: "50px",
+              letterSpacing: "1px",
+              textTransform: "uppercase",
+              boxShadow: "0 4px 20px rgba(10,61,92,0.35)",
               textShadow: "none",
-              transition: "background 0.2s, color 0.2s",
+              transition: "all 0.3s ease",
+              position: "relative",
+              zIndex: 2,
             }}
           >
-            Makinat Tona
+            Shiko Makinat
           </Link>
         </Banner>
       </HeroBackground>

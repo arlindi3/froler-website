@@ -25,10 +25,10 @@ function App() {
           <Navbar />
           <Switch>
             <Route exact path="/" component={Home} />
-            <Route exact path="/Makinat" component={Cars} />
-            <Route exact path="/Makinat/:slug" component={SingleCar} />
-            <Route exact path="/Servisi" component={Servisi} />
-            <Route exact path="/Rreth Nesh" component={RrethNesh} />
+            <Route exact path="/makinat" component={Cars} />
+            <Route exact path="/makinat/:slug" component={SingleCar} />
+            <Route exact path="/servisi" component={Servisi} />
+            <Route exact path="/rreth-nesh" component={RrethNesh} />
             <Route component={ErrorPage} />
           </Switch>
           <Footer />

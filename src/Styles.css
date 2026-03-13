@@ -394,6 +394,23 @@ h6 {
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+}
+
+.defaultHero::after,
+.carsHero::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 50%;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 0, 0, 0.55) 100%
+  );
+  pointer-events: none;
 }
 
 .carsHero {
@@ -402,6 +419,37 @@ h6 {
 }
 
 /* End of Hero */
+
+/* Hero CTA Button */
+.hero-cta:hover {
+  background-color: #fff !important;
+  color: #0a3d5c !important;
+  border-color: #fff !important;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3) !important;
+  transform: translateY(-3px);
+}
+
+/* Mobile: smaller hero CTA + taller banner */
+@media screen and (max-width: 768px) {
+  .hero-cta {
+    padding: 0.6rem 1.6rem !important;
+    font-size: 0.85rem !important;
+    letter-spacing: 0.5px !important;
+  }
+  .defaultHero {
+    min-height: 75vh;
+  }
+}
+@media screen and (max-width: 480px) {
+  .hero-cta {
+    padding: 0.5rem 1.2rem !important;
+    font-size: 0.78rem !important;
+  }
+  .defaultHero {
+    min-height: 80vh;
+  }
+}
+
 /* Banner */
 .banner {
   display: inline-block;
@@ -411,6 +459,8 @@ h6 {
   text-align: center;
   text-transform: capitalize;
   letter-spacing: var(--mainSpacing);
+  position: relative;
+  z-index: 1;
 }
 
 .banner h1 {

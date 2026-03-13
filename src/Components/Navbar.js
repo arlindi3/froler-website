@@ -139,7 +139,7 @@ export default class Navbar extends Component {
                 </li>
                 <li>
                   <Link
-                    to="/Makinat"
+                    to="/makinat"
                     onClick={this.closeMenu}
                     style={{
                       color: "white",
@@ -156,7 +156,7 @@ export default class Navbar extends Component {
                 </li>
                 <li>
                   <Link
-                    to="/Servisi"
+                    to="/servisi"
                     onClick={this.closeMenu}
                     style={{
                       color: "white",
@@ -173,7 +173,7 @@ export default class Navbar extends Component {
                 </li>
                 <li>
                   <Link
-                    to="/Rreth Nesh"
+                    to="/rreth-nesh"
                     onClick={this.closeMenu}
                     style={{
                       color: "white",
@@ -253,17 +253,17 @@ export default class Navbar extends Component {
                   </Link>
                 </li>
                 <li>
-                  <Link to="/Makinat" onClick={this.closeMenu}>
+                  <Link to="/makinat" onClick={this.closeMenu}>
                     Makinat
                   </Link>
                 </li>
                 <li>
-                  <Link to="/Servisi" onClick={this.closeMenu}>
+                  <Link to="/servisi" onClick={this.closeMenu}>
                     Servisi
                   </Link>
                 </li>
                 <li>
-                  <Link to="/Rreth Nesh" onClick={this.closeMenu}>
+                  <Link to="/rreth-nesh" onClick={this.closeMenu}>
                     Rreth Nesh
                   </Link>
                 </li>

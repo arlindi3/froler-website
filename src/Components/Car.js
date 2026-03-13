@@ -19,7 +19,7 @@ const Car = ({ car }) => {
         </div>
         <div style={{ display: "flex", justifyContent: "center" }}>
           <Link
-            to={`/Makinat/${slug}`}
+            to={`/makinat/${slug}`}
             className="btn-primary room-link"
             style={{
               width: "100%",
