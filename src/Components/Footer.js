@@ -176,7 +176,7 @@ const Footer = () => {
               <FaPhone /> +355 69 609 6666
             </p>
             <p>
-              <FaEnvelope /> autofroler@gmail.com
+              <FaEnvelope /> frolerauto@gmail.com
             </p>
           </div>
 
@@ -189,7 +189,7 @@ const Footer = () => {
                 <FaFacebook />
               </a>
               <a
-                href="https://instagram.com/auto.froler"
+                href="https://www.instagram.com/auto.froler/"
                 target="_blank"
                 rel="noreferrer"
               >
